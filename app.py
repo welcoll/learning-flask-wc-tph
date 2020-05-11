@@ -21,7 +21,7 @@ def create_connection(db_file):
 
 @app.route('/')
 def render_homepage():
-    return render_template('home.html')
+    return render_template('home.html', logged_in=is_logged_in())
 
 
 @app.route('/menu')
@@ -37,16 +37,19 @@ def render_menu_page():
     product_list = cur.fetchall()  # puts the results into a list usable in python
     con.close()
 
-    return render_template('menu.html', products=product_list)
+    return render_template('menu.html', products=product_list, logged_in=is_logged_in())
 
 
 @app.route('/contact')
 def render_contact_page():
-    return render_template('contact.html')
+    return render_template('contact.html', logged_in=is_logged_in())
 
 
 @app.route('/login', methods=["GET", "POST"])
 def render_login_page():
+    if is_logged_in():
+        return redirect('/')
+
     if request.method == "POST":
         email = request.form['email'].strip().lower()
         password = request.form['password'].strip()
@@ -82,6 +85,9 @@ def render_login_page():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def render_signup_page():
+    if is_logged_in():
+        return redirect('/')
+
     if request.method == 'POST':
         print(request.form)
         fname = request.form.get('fname').strip().title()
@@ -111,7 +117,7 @@ def render_signup_page():
         con.close()
         return redirect('/login')
 
-    return render_template('signup.html')
+    return render_template('signup.html', logged_in=is_logged_in())
 
 
 @app.route('/logout')
@@ -119,7 +125,7 @@ def logout():
     print(list(session.keys()))
     [session.pop(key) for key in list(session.keys())]
     print(list(session.keys()))
-    return redirect('/?message=See+you+next+time!')
+    return redirect(request.referrer + '?message=See+you+next+time!')
 
 
 def is_logged_in():
@@ -129,21 +135,6 @@ def is_logged_in():
     else:
         print("logged in")
         return True
-
-    #     username = session.get("USERNAME")
-    #     user = users[username]
-    #     return render_template("public/profile.html", user=user)
-    # else:
-    #     print("No username found in session")
-    #     return redirect(url_for("sign_in"))
-    #
-    #
-    # try:
-    #     print(session['email'])
-    #     return True
-    # except KeyError:
-    #     print("NO")
-    #     return False
 
 
 app.run(host='0.0.0.0', debug=True)
