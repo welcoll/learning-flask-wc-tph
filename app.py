@@ -32,7 +32,7 @@ def render_menu_page():
     con = create_connection(DB_NAME)
 
     # SELECT the things you want from your table(s)
-    query = "SELECT name, description, volume, price, image FROM product"
+    query = "SELECT name, description, volume, price, image, id FROM product"
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
