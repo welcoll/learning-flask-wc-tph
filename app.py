@@ -7,7 +7,7 @@ DB_NAME = "smile.db"
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-app.secret_key = "dn493f983h45983g845h94gh583"
+app.secret_key = "a"
 
 
 def create_connection(db_file):
@@ -32,7 +32,8 @@ def render_menu_page():
     con = create_connection(DB_NAME)
 
     # SELECT the things you want from your table(s)
-    query = "SELECT name, description, volume, price, image, id FROM product"
+    query = "SELECT name, description, volume, price, image, id " \
+            "FROM product"
 
     cur = con.cursor()  # You need this line next
     cur.execute(query)  # this line actually executes the query
@@ -40,6 +41,19 @@ def render_menu_page():
     con.close()
 
     return render_template('menu.html', products=product_list, logged_in=is_logged_in())
+
+
+@app.route('/addtocart/<productid>')
+def addtocart(productid):
+
+
+    return redirect(request.referrer)
+
+
+@app.route('/cart')
+def render_cart():
+
+    return render_template('cart.html', cart_items=cart_items, logged_in=is_logged_in())
 
 
 @app.route('/contact')
@@ -79,6 +93,7 @@ def render_login_page():
         session['email'] = email
         session['userid'] = userid
         session['firstname'] = firstname
+        session['cart'] = []
         print(session)
         return redirect('/')
 

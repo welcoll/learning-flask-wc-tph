@@ -48,17 +48,20 @@ nav {
     padding-bottom: 0.7rem;
     color: rgba(52, 152, 219, 1.0); /*light blue*/
 }
-.navbar-brand{
-    display:inline;
-    float:left;
+
+.navbar-brand {
+    display: inline;
+    float: left;
 }
-.navbar-links{
-    display:inline;
-    float:right;
+
+.navbar-links {
+    display: inline;
+    float: right;
 }
+
 nav a {
     /*margin:0 0.5rem;*/
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     font-size: 1.5rem;
 
     /*border: 1px solid rgba(52, 152, 219, 1.0);*/
@@ -94,21 +97,25 @@ a, a:visited {
     /*display: table-cell;*/
     /*padding: 0.5rem;*/
     /*margin: 1vw;*/
-    border: 1px solid rgba(189, 195, 199,1.0);
+    border: 1px solid rgba(189, 195, 199, 1.0);
     color: rgba(44, 62, 80, 1.0);
-    margin-bottom:0.5rem;
+    margin-bottom: 0.5rem;
 }
-.product-box-heading{
-    padding:0.5rem;
+
+.product-box-heading {
+    padding: 0.5rem;
 }
-.product-box-image{
-    height:150px;
+
+.product-box-image {
+    height: 150px;
     overflow: hidden;
 }
-.product-box-info{
-        padding:0.5rem;
+
+.product-box-info {
+    padding: 0.5rem;
 
 }
+
 .product-box h3 {
     font-size: 1.2rem;
     text-align: center;
@@ -116,7 +123,13 @@ a, a:visited {
 
 .product-box p {
     font-size: 0.8rem;
-    margin-bottom:0.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.product-box a {
+    border: 1px solid tomato;
+    padding: 0.3rem;
+    text-align: right;
 }
 
 .myform {
@@ -152,4 +165,40 @@ a, a:visited {
 .form-group input {
     padding: 0.3rem;
     width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.cart-table > thead {
+    font-weight: bold;
+}
+
+.cart-table td {
+    padding: 0.2rem 1rem;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.cart-total {
+    font-weight: bold;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+
+    .product-box {
+        width: 49%;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .product-box {
+        width: 100%;
+    }
 }

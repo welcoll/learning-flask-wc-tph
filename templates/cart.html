@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block pageheading %}
+cart
+{% endblock %}
+
+{% block main %}
+<table class="cart-table">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Item total</td>
+        <td>Remove one</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% set ns=namespace(total = 0) %}
+    {% for item in cart_items %}
+    <tr>
+        <td>{{ item[2] }}</td>
+        <td>{{ item[1] }}</td>
+        <td>${{ "{:.2f}".format(item[3]) }}</td>
+        <td>${{ "{:.2f}".format(item[3] * item[1]) }}</td>
+        <td><a href="/removeonefromcart/{{ item[0] }}"</td>
+        {% set ns.total = ns.total + item[3] * item[1] %}
+    </tr>
+    {% endfor %}
+    <td></td><td></td><td></td><td class="cart-total">${{ "{:.2f}".format(ns.total) }}</td><td></td>
+    </tbody>
+
+</table>
+{% endblock %}

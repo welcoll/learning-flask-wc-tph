@@ -19,7 +19,7 @@ menu
             <p><strong>Volume: </strong>{{ product[2] }}</p>
             <p><strong>Price: </strong>${{ product[3] }}</p>
             {% if logged_in %}
-            <a href="/addtocart/{{ menu[5] }}">Add to cart</a>
+            <a href="/addtocart/{{ product[5] }}">Add to cart &raquo;</a>
             {% endif %}
         </div>
     </div>
